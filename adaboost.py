@@ -46,7 +46,15 @@ def calculate_covariance_matrix(X, Y=None):
     covariance_matrix = (1 / (n_samples-1)) * (X - X.mean(axis=0)).T.dot(Y - Y.mean(axis=0))
 
     return np.array(covariance_matrix, dtype=float)
- 
+
+def calculate_variance(X):
+    """ Return the variance of the features in dataset X """
+    mean = np.ones(np.shape(X)) * X.mean(0)
+    n_samples = np.shape(X)[0]
+    variance = (1 / n_samples) * np.diag((X - mean).T.dot(X - mean))
+    
+    return variance
+    
 def calculate_std_dev(X):
     """ Calculate the standard deviations of the features in dataset X """
     std_dev = np.sqrt(calculate_variance(X))
